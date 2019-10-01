@@ -1,0 +1,84 @@
+<html>
+    <head>
+     <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+
+        <div id= 'flex-box'>
+            <h1>Acme Customers VIP</h1>
+            <form class = "container">
+                <label> Name
+                <input id ='name'  name = "name" type="text">
+            </label>
+            <label> Email
+                <input id ='Email' name = "Email" id='nameEquals' type="text">
+            </label>
+            <label> isVIP
+                    <input id ='VIP' name = "isVIP" type="checkbox">
+                </label>
+                <button class="create" >Create</button>
+            </form>
+            <div class='numVIP'>2 VIP</div>
+            <div class='customersList'></div>
+        </div>
+    </body>
+
+    <script>
+    let customers = [
+      { id: 1, name: 'moe', email: 'moe@gmail.com', isVIP: true},
+      { id: 2, name: 'larry', isVIP: true, email: 'larry@gmail.com'},
+      { id: 4, name: 'shep', email: 'shep@gmail.com'},
+     ];
+
+    const formCreator = document.querySelector('.container')
+    const creator = document.querySelector('.create')
+    const customersList = document.querySelector('.customersList')
+    const destroy = document.getElementsByClassName('destroy')
+
+
+    formCreator.addEventListener( 'submit', ev =>{
+        
+        const newName = document.getElementById('name').value
+        const newEmail= document.getElementById('Email').value
+        const newVIP= document.getElementById('VIP').checked
+        ev.preventDefault()
+        console.log(newName)
+        console.log(newEmail)
+        console.log(newVIP)
+
+        let customerObj= {
+            name: newName,
+            email: newEmail,
+            isVIP: newVIP
+            }
+
+        customers.push(customerObj)
+        customersList.innerHTML = ''
+        list()
+
+           
+
+    })
+
+    let list  = () =>{
+            customers.forEach( item =>{
+
+            let customer = document.createElement('div')
+            customer.classList.add('customer')
+            if(item.isVIP){
+                customer.classList.add('VIP')
+            }
+            customer.innerHTML = `${item.name} (${item.email}) <button class='destroy'>destroy</button>`
+            customersList.appendChild(customer)
+
+        })
+        }
+        list()
+
+     
+
+ 
+    </script>
+
+    </html>
+</html>
